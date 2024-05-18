@@ -11,11 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transaction_details', function (Blueprint $table) {
+        Schema::create('tikets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaction_id')->constrained();
-            $table->foreignId('product_id')->constrained();
-            $table->integer('quantity');
+            $table->string('no_tiket');
+            $table->string('nama');
+            $table->string('email');
+            $table->string('no_hp');
+            $table->string('status');
+            $table->integer('agent_id')->nullable();
+            $table->integer('properti_id')->nullable();
+
+
             $table->timestamps();
         });
     }
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transaction_details');
+        Schema::dropIfExists('tikets');
     }
 };

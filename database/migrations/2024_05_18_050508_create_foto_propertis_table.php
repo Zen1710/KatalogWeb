@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('foto_propertis', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_code');
-            $table->integer('total');
-            $table->date('transaction_date');
-            $table->foreignId('user_id')->constrained();
-
+            $table->string('foto');
+            $table->integer('properti_id')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('foto_propertis');
     }
 };
