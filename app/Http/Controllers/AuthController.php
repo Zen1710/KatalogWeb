@@ -35,7 +35,7 @@ class AuthController extends Controller
         if (User::where('email', '=', $input['email'])->first() == true) {
             if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
   
-                        return redirect('/admin/dashboard');
+                        return redirect('dashboard');
        
             } else {
                 return redirect()->back()
@@ -52,5 +52,9 @@ class AuthController extends Controller
 
         Auth::logout();
         return redirect('/');
+    }
+
+    public function dashboard(){
+        return view('dashboard');
     }
 }

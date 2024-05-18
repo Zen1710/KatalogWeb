@@ -75,15 +75,15 @@
                         </div>
                         @endif
 
-                        <form action="{{url('postlogin')}}" method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off">
+                        <form action="{{url('login-post')}}" method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off">
                             @csrf
                             <div class="mb-3">
-                                <label class="mb-2 text-muted fw-bold " for="email">Nama Pengguna</label>
+                                <label class="mb-2 text-muted fw-bold " for="email">Email</label>
                                 <div class="input-group input-group-join mb-3">
-                                    <input type="text" class="form-control" id="nama_pengguna" placeholder="Masukkan nama pengguna" name="nama_pengguna" id="validationCustom01" required autofocus>
+                                    <input type="text" class="form-control" id="nama_pengguna" placeholder="Masukkan Email" name="email" id="validationCustom01" required autofocus>
                                     <span class="input-group-text rounded-end">&nbsp<i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp</span>
                                     <div class="invalid-feedback">
-                                        Nama pengguna tidak boleh kosong
+                                        Email tidak boleh kosong
                                     </div>
 
 
@@ -92,11 +92,11 @@
 
                             <div class="mb-3">
                                 <div class="mb-2 w-100">
-                                    <label class="text-muted fw-bold" for="password">Kata Sandi</label>
+                                    <label class="text-muted fw-bold" for="password">Password</label>
                                 </div>
                                 <div class="input-group input-group-join mb-3">
 
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan kata sandi" required>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
 
 
                                     <span class="input-group-text rounded-end password cursor-pointer">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
