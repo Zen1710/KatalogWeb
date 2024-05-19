@@ -1,1 +1,1 @@
-selamat masuk
+@extends('theme.admin.master')
