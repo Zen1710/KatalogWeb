@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="mt-4 d-grid gap-2 ">
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-success">Login</button>
                             </div>
                         </form>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mitra;
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
@@ -12,6 +13,8 @@ class MitraController extends Controller
     public function index()
     {
         //
+        $mitra = Mitra::orderBy('id','desc')->get();
+        return view('mitra',compact('mitra'));
     }
 
     /**

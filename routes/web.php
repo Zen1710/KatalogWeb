@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MitraController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,9 @@ Route::get('/login', function () {
     return view('auth.login');
 });
 Route::post('login-post',[AuthController::class,'postlogin']);
-Route::get('dashboard',[AuthController::class,'dashboard']);
+Route::get('admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 Route::get('/', function () {
         return view('page.landing_page');
     });
+
+Route::resource('admin/mitra',MitraController::class);
