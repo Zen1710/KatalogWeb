@@ -1,4 +1,10 @@
 @extends('theme.admin.master')
 @section('content')
-dashboard
+
+<div class="card">
+    <div class="card-body">
+        
+    </div>
+</div>
+
 @endsection

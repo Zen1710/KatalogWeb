@@ -35,7 +35,7 @@ class AuthController extends Controller
         if (User::where('email', '=', $input['email'])->first() == true) {
             if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
   
-                        return redirect('dashboard');
+                        return redirect('admin/dashboard');
        
             } else {
                 return redirect()->back()

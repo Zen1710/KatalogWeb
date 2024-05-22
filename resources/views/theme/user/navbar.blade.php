@@ -2,14 +2,14 @@
         <div class="container">
             <div class="menu-bg-wrap">
                 <div class="site-navigation">
-                    <a href="index.html" class="logo m-0 float-start">E-KATALOG</a>
+                    <a href="" class="logo m-0 float-start">E-KATALOG</a>
 
                     <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li class=""><a href="index.html">Property</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a class="btn btn-sm btn-light text-dark px-3" href="contact.html">Login</a></li>
+                        <li class="{{request()->is('/') ? 'active' : '' }}"><a href="{{url('/')}}">Home</a></li>
+                        <li class="{{request()->is('property') ? 'active' : '' }}"><a href="{{url('property')}}">Property</a></li>
+                        <li class="{{request()->is('about') ? 'active' : '' }}" ><a href="{{url('about')}}">About</a></li>
+                        <li class="{{request()->is('contact_us') ? 'active' : '' }}" ><a href="{{url('contact_us')}}">Contact Us</a></li>
+                        <li><a class="btn btn-sm btn-light text-dark px-3" href="{{url('login')}}">Login</a></li>
                     </ul>
 
                     <a href="#"
