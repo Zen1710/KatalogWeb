@@ -31,6 +31,7 @@ Route::get('/', [LandingPageController::class, 'index']);
 Route::get('property', [LandingPageController::class, 'property']);
 Route::get('about', [LandingPageController::class, 'about']);
 Route::get('contact_us', [LandingPageController::class, 'contact_us']);
+Route::get('faq', [LandingPageController::class, 'faq']);
 
 Route::get('admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 Route::resource('admin/mitra',MitraController::class);

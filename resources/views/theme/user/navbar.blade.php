@@ -9,6 +9,7 @@
                         <li class="{{request()->is('property') ? 'active' : '' }}"><a href="{{url('property')}}">Property</a></li>
                         <li class="{{request()->is('about') ? 'active' : '' }}" ><a href="{{url('about')}}">About</a></li>
                         <li class="{{request()->is('contact_us') ? 'active' : '' }}" ><a href="{{url('contact_us')}}">Contact Us</a></li>
+                        <li class="{{request()->is('faq') ? 'active' : '' }}" ><a href="{{url('faq')}}">Faq</a></li>
                         <li><a class="btn btn-sm btn-light text-dark px-3" href="{{url('login')}}">Login</a></li>
                     </ul>
 

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{url('theme_property')}}/css/style.css" />
 
     <title>
-        Property &mdash; Free Bootstrap 5 Website Template by Untree.co
+        E katalog
     </title>
 </head>
 

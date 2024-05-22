@@ -24,4 +24,8 @@ class LandingPageController extends Controller
     {
         return view('page.contact_us');
     }
+    public function faq()
+    {
+        return view('page.faq');
+    }
 }
