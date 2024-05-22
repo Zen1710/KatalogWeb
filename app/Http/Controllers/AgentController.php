@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Agent;
 
 class AgentController extends Controller
 {
@@ -11,7 +12,8 @@ class AgentController extends Controller
      */
     public function index()
     {
-        return view('admin.agen');
+        $data = Agent::all();
+        return view('admin.agen',compact('data'));
     }
 
     /**

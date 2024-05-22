@@ -13,8 +13,8 @@ class MitraController extends Controller
     public function index()
     {
         //
-        $mitra = Mitra::orderBy('id','desc')->get();
-        return view('mitra',compact('mitra'));
+        $data = Mitra::orderBy('id','desc')->get();
+        return view('admin.mitra',compact('data'));
     }
 
     /**

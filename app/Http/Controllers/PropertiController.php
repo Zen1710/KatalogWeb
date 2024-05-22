@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Properti;
 
 class PropertiController extends Controller
 {
@@ -11,7 +12,8 @@ class PropertiController extends Controller
      */
     public function index()
     {
-        return view('admin.property');
+        $data = Properti::all();
+        return view('admin.property',compact('data'));
     }
 
     /**

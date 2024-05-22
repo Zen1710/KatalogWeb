@@ -2,7 +2,43 @@
 @section('content')
 
 <div class="card">
+    <div class="card-header bg-primary">
+        <h6 class="mb-0 text-white">Faq
+            <a href="{{url('admin/faq/create')}}" class="btn btn-sm float-end btn-light">Add</a>
+        </h6>
+    </div>
     <div class="card-body">
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($data as $item)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->question}}</td>
+                        <td>{!! $item->answer !!}</td>
+                        <td>
+                            <a href="{{url('admin/faq/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{{url('admin/faq/'.$item->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center">Tidak ada data</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+        </div>
         
     </div>
 </div>

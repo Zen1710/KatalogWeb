@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tiket;
 
 class TiketController extends Controller
 {
@@ -11,7 +12,8 @@ class TiketController extends Controller
      */
     public function index()
     {
-        return view('admin.tiket');
+        $data = Tiket::all();
+        return view('admin.tiket',compact('data'));
     }
 
     /**
