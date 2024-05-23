@@ -8,6 +8,10 @@ use App\Http\Controllers\PropertiController;
 use App\Http\Controllers\TiketController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FotoDenahController;
+use App\Http\Controllers\FotoPropertiController;
+use App\Models\FotoDenah;
+use App\Models\FotoProperti;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,6 +49,20 @@ Route::get('admin/agen/{id}/delete', [AgentController::class, 'destroy']);
 
 Route::resource('admin/property',PropertiController::class);
 Route::get('admin/property/{id}/delete', [PropertiController::class, 'destroy']);
+
+Route::resource('admin/foto_denahs',FotoDenahController::class);
+Route::get('admin/foto_denah/{properti}', [FotoDenahController::class, 'index_properti']);
+Route::get('admin/foto_denah/create/{properti}', [FotoDenahController::class, 'create_properti']);
+Route::get('admin/foto_denahs/{id}/delete', [FotoDenahController::class, 'destroy']);
+
+
+Route::resource('admin/foto_propertis',FotoPropertiController::class);
+Route::get('admin/foto_properti/{properti}', [FotoPropertiController::class, 'index_properti']);
+Route::get('admin/foto_properti/create/{properti}', [FotoPropertiController::class, 'create_properti']);
+Route::get('admin/foto_propertis/{id}/delete', [FotoPropertiController::class, 'destroy']);
+
+
+
 
 Route::resource('admin/faq',FaqController::class);
 Route::get('admin/faq/{id}/delete', [FaqController::class, 'destroy']);

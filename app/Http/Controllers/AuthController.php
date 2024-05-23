@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agent;
+use App\Models\Mitra;
+use App\Models\Properti;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +62,9 @@ class AuthController extends Controller
     }
 
     public function dashboard(){
-        return view('dashboard');
+        $agent = Agent::count();
+        $properti = Properti::count();
+        $mitra = Mitra::count();
+        return view('dashboard',compact('mitra','agent','properti'));
     }
 }

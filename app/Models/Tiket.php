@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Tiket extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
 }

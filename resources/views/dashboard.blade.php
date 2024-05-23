@@ -19,7 +19,7 @@
                     
                 </div>
                 <small class="text-success fw-medium">Agen</small>
-                <h3 class="card-title mb-2">72</h3>
+                <h3 class="card-title mb-2">{{$agent}}</h3>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
                     
                 </div>
                 <small class="text-success fw-medium">Mitra</small>
-                <h3 class="card-title mb-2">72</h3>
+                <h3 class="card-title mb-2">{{$mitra}}</h3>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                     
                 </div>
                 <small class="text-success fw-medium">Property</small>
-                <h3 class="card-title mb-2">72</h3>
+                <h3 class="card-title mb-2">{{$properti}}</h3>
             </div>
         </div>
     </div>
