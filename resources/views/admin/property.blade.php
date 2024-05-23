@@ -26,14 +26,16 @@
                     @forelse ($data as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->nama_property}}</td>
-                        <td>{{$item->type_property}}</td>
+                        <td>{{$item->nama_properti}}</td>
+                        <td>{{$item->type_properti}}</td>
                         <td>{{$item->alamat}}</td>
                         <td>{{$item->harga}}</td>
                         <td>{{$item->status}}</td>
                         <td>
                             <a href="{{url('admin/property/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{{url('admin/property/'.$item->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{{url('admin/foto_denah/'.$item->id)}}" class="btn btn-sm btn-success">Foto Denah</a>
+                            <a href="{{url('admin/foto_properti/'.$item->id)}}" class="btn btn-sm btn-success">Foto properti</a>
                         </td>
                     </tr>
                     @empty

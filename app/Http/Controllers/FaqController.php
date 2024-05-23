@@ -22,6 +22,7 @@ class FaqController extends Controller
     public function create()
     {
         //
+        return view('admin.faq-add');
     }
 
     /**
@@ -30,6 +31,15 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'question'=>'required',
+            'answer'=>'required',
+        ]);
+     
+
+        Faq::create($data);
+        return redirect('admin/faq')
+        ->with('success',' Berhasil Ditambahkan');
     }
 
     /**
@@ -62,5 +72,7 @@ class FaqController extends Controller
     public function destroy(string $id)
     {
         //
+        Faq::findOrFail($id)->delete();
+        return redirect()->back()->with('success',' Berhasil DiHapus');
     }
 }

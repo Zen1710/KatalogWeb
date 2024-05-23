@@ -16,8 +16,8 @@
                         <th>No</th>
                         <th>Nama Agent</th>
                         <th>Email</th>
-                        <th>Foto</th>
                         <th>No Hp</th>
+                        <th>Foto</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -27,9 +27,9 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->nama_agent}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->no_hp}}</td>
+                        <td>{{$item->nohp}}</td>
                         <td>
-                            <img src="{{asset($item->foto)}}" width="50" alt="">
+                            <img src="{{asset('mitra/'.$item->foto)}}" width="50" alt="">
                         </td>
                         <td>
                             <a href="{{url('admin/agen/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>

@@ -22,6 +22,7 @@ class PropertiController extends Controller
     public function create()
     {
         //
+        return view('admin.property-add');
     }
 
     /**
@@ -30,6 +31,22 @@ class PropertiController extends Controller
     public function store(Request $request)
     {
         //
+        // return $request;
+        $data = $request->validate([
+            'nama_properti'=>'required','type_properti'=>'required',
+            'nomor_rumah'=>'required','deskripsi'=>'required',
+            'luas'=>'required','tahun_pembuatan'=>'required',
+            'jumlah_kamar_tidur'=>'required','jumlah_kamar_mandi'=>'required',
+            'garasi'=>'required','status'=>'required',
+            'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
+            'gym'=>'required','alamat'=>'required','longitude'=>'required','latitude'=>'required',
+            'harga'=>'required','informasi_tambahan'=>'required'
+        ]);
+        
+
+        Properti::create($data);
+        return redirect('admin/property')
+        ->with('success',' Berhasil Ditambahkan');
     }
 
     /**
@@ -46,6 +63,8 @@ class PropertiController extends Controller
     public function edit(string $id)
     {
         //
+        $property = Properti::find($id);
+        return view('admin.property-edit',compact('property'));
     }
 
     /**
@@ -54,6 +73,21 @@ class PropertiController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->validate([
+            'nama_properti'=>'required','type_properti'=>'required',
+            'nomor_rumah'=>'required','deskripsi'=>'required',
+            'luas'=>'required','tahun_pembuatan'=>'required',
+            'jumlah_kamar_tidur'=>'required','jumlah_kamar_mandi'=>'required',
+            'garasi'=>'required','status'=>'required',
+            'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
+            'gym'=>'required','alamat'=>'required','longitude'=>'required','latitude'=>'required',
+            'harga'=>'required','informasi_tambahan'=>'required'
+        ]);
+        
+
+        Properti::where('id',$id)->update($data);
+        return redirect('admin/property')
+        ->with('success',' Berhasil Diupdate');
     }
 
     /**
@@ -62,5 +96,7 @@ class PropertiController extends Controller
     public function destroy(string $id)
     {
         //
+        Properti::findOrFail($id)->delete();
+        return redirect()->back()->with('success',' Berhasil DiHapus');
     }
 }

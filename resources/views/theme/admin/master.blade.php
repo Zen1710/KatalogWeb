@@ -38,6 +38,8 @@
 
     <!-- Helpers -->
     <script src="{{url('sneat')}}/assets/vendor/js/helpers.js"></script>
+    <link rel="stylesheet" href="{{asset('/toastr/toastr.min.css') }}">
+
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -123,6 +125,20 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- <script src="{{asset('arfa/toastr/toastr.min.js') }}"></script> -->
+    <script src="{{url('toastr')}}/toastr.min.js"></script>
+
+    <script>
+    toastr.options.timeOut = 1500;
+    toastr.options.showMethod = 'slideDown';
+    toastr.options.hideMethod = 'slideUp';
+    toastr.options.closeMethod = 'slideUp';
+    @if(session()->has('success'))
+        toastr.success('{{session()->get("success")}}')
+    @elseif(session()->has('error'))
+        toastr.error('{{session()->get("error")}}')
+    @endif
+</script>
 
 </body>
 

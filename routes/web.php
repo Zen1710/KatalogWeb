@@ -22,9 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Route::get('/login', function () {
+//     return view('auth.login')->name('login');
+// });
+Route::get('login',[AuthController::class,'login'])->name('login');
+
 Route::post('login-post',[AuthController::class,'postlogin']);
 Route::get('logout',[AuthController::class,'logout']);
 Route::get('/', [LandingPageController::class, 'index']);
@@ -33,11 +35,21 @@ Route::get('about', [LandingPageController::class, 'about']);
 Route::get('contact_us', [LandingPageController::class, 'contact_us']);
 Route::get('faq', [LandingPageController::class, 'faq']);
 
+Route::middleware('auth')->group(function () {  
 Route::get('admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 Route::resource('admin/mitra',MitraController::class);
+Route::get('admin/mitra/{id}/delete', [MitraController::class, 'destroy']);
+
 Route::resource('admin/agen',AgentController::class);
+Route::get('admin/agen/{id}/delete', [AgentController::class, 'destroy']);
+
 Route::resource('admin/property',PropertiController::class);
+Route::get('admin/property/{id}/delete', [PropertiController::class, 'destroy']);
+
 Route::resource('admin/faq',FaqController::class);
+Route::get('admin/faq/{id}/delete', [FaqController::class, 'destroy']);
+
 Route::resource('admin/tiket',TiketController::class);
-Route::resource('admin/property',PropertiController::class);
+
 Route::resource('admin/about',AboutController::class);
+});

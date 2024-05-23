@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Agent;
+use Carbon\Carbon;
 
 class AgentController extends Controller
 {
@@ -22,14 +23,30 @@ class AgentController extends Controller
     public function create()
     {
         //
+        return view('admin.agen-add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'nama_agent'=>'required',
+            'foto'=>'required',
+            'email'=>'required',
+            'nohp'=>'required',
+        ]);
+        
+        if($request->hasFile('foto')){
+            $tujuan_upload = public_path('mitra');
+            $file = $request->file('foto');
+            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
+            $file->move($tujuan_upload, $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        Agent::create($data);
+        return redirect('admin/agen')
+        ->with('success',' Berhasil Ditambahkan');
     }
 
     /**
@@ -38,6 +55,7 @@ class AgentController extends Controller
     public function show(string $id)
     {
         //
+       
     }
 
     /**
@@ -46,6 +64,8 @@ class AgentController extends Controller
     public function edit(string $id)
     {
         //
+        $agen = Agent::find($id);
+        return view('admin.agen-edit',compact('agen','id'));
     }
 
     /**
@@ -54,6 +74,25 @@ class AgentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+
+        $data = $request->validate([
+            'nama_agent'=>'required',
+            'email'=>'required',
+            'nohp'=>'required',
+            // 'foto'=>'required',
+        ]);
+        
+        if($request->hasFile('foto')){
+            $tujuan_upload = public_path('agen');
+            $file = $request->file('foto');
+            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
+            $file->move($tujuan_upload, $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        Agent::findOrFail($id)->update($data);
+        return redirect('admin/agen')
+        ->with('success',' Berhasil DiUpdate');
     }
 
     /**
@@ -62,5 +101,7 @@ class AgentController extends Controller
     public function destroy(string $id)
     {
         //
+        Agent::findOrFail($id)->delete();
+        return redirect()->back()->with('success',' Berhasil DiHapus');
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomor_rumah');
             $table->string('deskripsi');
             $table->integer('luas');
-            $table->integer('tahun_pembuatan');
+            $table->date('tahun_pembuatan');
             $table->integer('jumlah_kamar_tidur');
             $table->integer('jumlah_kamar_mandi');
             $table->integer('garasi');

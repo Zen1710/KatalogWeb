@@ -26,7 +26,7 @@
                         <td>{{$item->question}}</td>
                         <td>{!! $item->answer !!}</td>
                         <td>
-                            <a href="{{url('admin/faq/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
+                            <!-- <a href="{{url('admin/faq/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a> -->
                             <a href="{{url('admin/faq/'.$item->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
@@ -23,6 +24,7 @@ class MitraController extends Controller
     public function create()
     {
         //
+        return view('admin.mitra-add');
     }
 
     /**
@@ -31,6 +33,22 @@ class MitraController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->validate([
+            'nama_mitra'=>'required',
+            'foto'=>'required',
+        ]);
+        
+        if($request->hasFile('foto')){
+            $tujuan_upload = public_path('mitra');
+            $file = $request->file('foto');
+            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
+            $file->move($tujuan_upload, $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        Mitra::create($data);
+        return redirect('admin/mitra')
+        ->with('success',' Berhasil Ditambahkan');
     }
 
     /**
@@ -39,6 +57,7 @@ class MitraController extends Controller
     public function show(string $id)
     {
         //
+       
     }
 
     /**
@@ -47,6 +66,8 @@ class MitraController extends Controller
     public function edit(string $id)
     {
         //
+        $mitra = Mitra::find($id);
+        return view('admin.mitra-edit',compact('mitra','id'));
     }
 
     /**
@@ -55,6 +76,23 @@ class MitraController extends Controller
     public function update(Request $request, string $id)
     {
         //
+
+        $data = $request->validate([
+            'nama_mitra'=>'required',
+            // 'foto'=>'required',
+        ]);
+        
+        if($request->hasFile('foto')){
+            $tujuan_upload = public_path('mitra');
+            $file = $request->file('foto');
+            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
+            $file->move($tujuan_upload, $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        Mitra::findOrFail($id)->update($data);
+        return redirect('admin/mitra')
+        ->with('success',' Berhasil DiUpdate');
     }
 
     /**
@@ -63,5 +101,7 @@ class MitraController extends Controller
     public function destroy(string $id)
     {
         //
+        Mitra::findOrFail($id)->delete();
+        return redirect()->back()->with('success',' Berhasil DiHapus');
     }
 }
