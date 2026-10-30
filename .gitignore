@@ -22,5 +22,10 @@ yarn-error.log
 # Foto orang asli (dummy agen/mitra), jangan dipublikasikan
 /public/images/mitra/*-WA*.jpg
 
-# Gambar hasil DemoSeeder (dibuat ulang dengan php artisan db:seed)
-/public/images/*/demo-*
+# Foto hasil upload admin dan DemoSeeder (file lama yang sudah ter-commit tetap dilacak)
+/public/images/about/*
+/public/images/agen/*
+/public/images/foto_denah/*
+/public/images/foto_properti/*
+/public/images/mitra/*
+!/public/images/foto_properti/empty_image.jpg
