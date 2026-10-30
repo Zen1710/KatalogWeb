@@ -51,7 +51,8 @@ class LandingPageController extends Controller
             ->when($request->filled('to_price'), fn ($query) => $query->where('harga', '<=', (int) $request->to_price))
             ->when($request->filled('jumlah_kamar_tidur'), fn ($query) => $this->filterJumlahKamar($query, 'jumlah_kamar_tidur', $request->jumlah_kamar_tidur))
             ->when($request->filled('jumlah_kamar_mandi'), fn ($query) => $this->filterJumlahKamar($query, 'jumlah_kamar_mandi', $request->jumlah_kamar_mandi))
-            ->get();
+            ->paginate(9)
+            ->withQueryString();
 
         return view('page.property',compact('property','jumlah'));
     }

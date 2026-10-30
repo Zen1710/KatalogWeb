@@ -184,6 +184,10 @@
             </div>
             @endforelse
 
+            <div class="col-12 d-flex justify-content-center mt-4">
+                {{ $property->links() }}
+            </div>
+
 
 
         </div>
