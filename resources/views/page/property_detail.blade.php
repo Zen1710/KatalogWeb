@@ -282,7 +282,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Ulasan</label>
-                        <textarea name="ulasan" id="" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="ulasan" id="" cols="30" rows="10" class="form-control" required maxlength="1000"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Kirim</button>
                 </form>

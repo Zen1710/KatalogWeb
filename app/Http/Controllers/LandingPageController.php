@@ -74,11 +74,13 @@ class LandingPageController extends Controller
 
     public function ulasan($id, Request $request)
     {
-        Ulasan::create([
-            'nama'=> $request->nama,
-            'ulasan'=> $request->ulasan,
-            'properti_id'=> $id
+        $properti = Properti::findOrFail($id);
+        $data = $request->validate([
+            'nama' => 'required|max:100',
+            'ulasan' => 'required|max:1000',
         ]);
+
+        Ulasan::create($data + ['properti_id' => $properti->id]);
 
         return redirect()->back()->with('success', 'Ulasan Berhasil Ditambahkan');
     }

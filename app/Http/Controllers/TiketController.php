@@ -31,14 +31,12 @@ class TiketController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'properti_id'=>'required',
-            'nama'=>'required',
-            'email'=>'required',
-            'no_hp'=>'required',
+            'properti_id'=>'required|exists:propertis,id',
+            'nama'=>'required|max:100',
+            'email'=>'required|email|max:100',
+            'no_hp'=>'required|max:20',
+            'pesan'=>'nullable|max:255',
         ]);
-        if($request->has('pesan')) {
-            $data['pesan'] = $request->pesan;
-        }
         $data['status'] = 'pending';
         $data['no_tiket'] = 'INV' . rand(100000, 999999);
         Tiket::create($data);

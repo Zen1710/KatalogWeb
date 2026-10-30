@@ -40,8 +40,8 @@ Route::get('property/detail/{id}', [LandingPageController::class, 'property_deta
 Route::get('about', [LandingPageController::class, 'about']);
 Route::get('contact_us', [LandingPageController::class, 'contact_us']);
 Route::get('faq', [LandingPageController::class, 'faq']);
-Route::post('buat-tiket', [TiketController::class, 'store']);
-Route::post('kirimulasan/{id}', [LandingPageController::class, 'ulasan']);
+Route::post('buat-tiket', [TiketController::class, 'store'])->middleware('throttle:5,1');
+Route::post('kirimulasan/{id}', [LandingPageController::class, 'ulasan'])->middleware('throttle:5,1');
 
 Route::middleware('auth')->group(function () {  
 Route::get('admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
