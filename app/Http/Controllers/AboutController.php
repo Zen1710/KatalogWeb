@@ -29,7 +29,7 @@ class AboutController extends Controller
         ]);
         
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('about');
+            $tujuan_upload = public_path('images/about');
             $file = $request->file('foto');
             $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
             $file->move($tujuan_upload, $namaFile);

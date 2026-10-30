@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ulasans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('ulasan');
+            $table->text('ulasan');
             $table->integer('properti_id')->nullable();
 
             $table->timestamps();

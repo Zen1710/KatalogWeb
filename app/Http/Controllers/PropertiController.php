@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Properti;
+use App\Models\Ulasan;
+use App\Models\Tiket;
 
 class PropertiController extends Controller
 {
@@ -39,9 +41,15 @@ class PropertiController extends Controller
             'jumlah_kamar_tidur'=>'required','jumlah_kamar_mandi'=>'required',
             'garasi'=>'required','status'=>'required',
             'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
-            'gym'=>'required','alamat'=>'required','longitude'=>'required','latitude'=>'required',
+            'gym'=>'required','alamat'=>'required',
             'harga'=>'required','informasi_tambahan'=>'required'
         ]);
+
+        if($request->has('latitude')) {
+            $data['latitude'] = $request->latitude;
+            $data['longitude'] = $request->longitude;
+        }
+
         
 
         Properti::create($data);
@@ -80,10 +88,14 @@ class PropertiController extends Controller
             'jumlah_kamar_tidur'=>'required','jumlah_kamar_mandi'=>'required',
             'garasi'=>'required','status'=>'required',
             'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
-            'gym'=>'required','alamat'=>'required','longitude'=>'required','latitude'=>'required',
+            'gym'=>'required','alamat'=>'required',
             'harga'=>'required','informasi_tambahan'=>'required'
         ]);
         
+        if($request->has('latitude')) {
+            $data['latitude'] = $request->latitude;
+            $data['longitude'] = $request->longitude;
+        }
 
         Properti::where('id',$id)->update($data);
         return redirect('admin/property')
@@ -96,7 +108,17 @@ class PropertiController extends Controller
     public function destroy(string $id)
     {
         //
+        Tiket::where('properti_id',$id)->delete();
+        Ulasan::where('properti_id',$id)->delete();
         Properti::findOrFail($id)->delete();
         return redirect()->back()->with('success',' Berhasil DiHapus');
+    }
+
+    public function status(Request $request)
+    {
+        Properti::where('id',$request->id)->update([
+            'terjual'=>$request->terjual
+        ]);
+        return redirect()->back()->with('success',' Berhasil Diupdate');
     }
 }

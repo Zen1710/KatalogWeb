@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="{{url('theme_property')}}/css/tiny-slider.css" />
     <link rel="stylesheet" href="{{url('theme_property')}}/css/aos.css" />
     <link rel="stylesheet" href="{{url('theme_property')}}/css/style.css" />
+    <link rel="stylesheet" href="{{asset('/toastr/toastr.min.css') }}">
+
+    @stack('css')
 
     <title>
         E katalog
@@ -58,6 +61,23 @@
     <script src="{{url('theme_property')}}/js/navbar.js"></script>
     <script src="{{url('theme_property')}}/js/counter.js"></script>
     <script src="{{url('theme_property')}}/js/custom.js"></script>
+    <script src="{{url('sneat')}}/assets/vendor/libs/jquery/jquery.js"></script>
+
+    <script src="{{url('toastr')}}/toastr.min.js"></script>
+
+    <script>
+    toastr.options.timeOut = 1500;
+    toastr.options.showMethod = 'slideDown';
+    toastr.options.hideMethod = 'slideUp';
+    toastr.options.closeMethod = 'slideUp';
+    @if(session()->has('success'))
+        toastr.success('{{session()->get("success")}}')
+    @elseif(session()->has('error'))
+        toastr.error('{{session()->get("error")}}')
+    @endif
+</script>
+    @stack('js')
+    
 </body>
 
 </html>

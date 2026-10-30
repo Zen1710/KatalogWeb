@@ -20,11 +20,19 @@
                 </div>
                 <div class="form-group">
                     <label for="" class="form-label">Type Properti</label>
-                    <input type="text" class="form-control @error('type_properti') is-invalid @enderror" name="type_properti" value="{{$property->type_properti}}">
+                    <div class="form-group">
+                    <label for="" class="form-label @error('type_properti') is-invalid @enderror">Type Properti</label>
+                    <select name="type_properti" id="" class="form-control">
+                        <option value="Rumah" {{ old('type_properti', $property->type_properti) == 'Rumah' ? 'selected' : '' }}>Rumah</option>
+                        <option value="Apartement" {{ old('type_properti', $property->type_properti) == 'Apartement' ? 'selected' : '' }} >Apartement</option>
+                        <option value="Villa" {{ old('type_properti', $property->type_properti) == 'Villa' ? 'selected' : '' }} >Villa</option>
+                        <option value="Hotel" {{ old('type_properti', $property->type_properti) == 'Hotel' ? 'selected' : '' }}>Hotel</option>
+                    </select>
+                </div>
                 </div>
                 <div class="form-group">
                     <label for="" class="form-label">Nomor Rumah</label>
-                    <input type="number" class="form-control @error('nomor_rumah') is-invalid @enderror" name="nomor_rumah" value="{{$property->nomor_rumah}}">
+                    <input type="text" class="form-control @error('nomor_rumah') is-invalid @enderror" name="nomor_rumah" value="{{$property->nomor_rumah}}">
                 </div>
                 <div class="form-group">
                     <label for="" class="form-label">Deskripsi</label>
@@ -39,8 +47,8 @@
                     <label for="status" class="form-label">Status</label>
                     <select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
                         <option disabled {{ old('status', $property->status) == '' ? 'selected' : '' }}>Pilih Status</option>
-                        <option value="Ada" {{ old('status', $property->status) == 'Ada' ? 'selected' : '' }}>Ada</option>
-                        <option value="Tidak Ada" {{ old('status', $property->status) == 'Tidak Ada' ? 'selected' : '' }}>Tidak Ada</option>
+                        <option value="Dijual" {{ old('status', $property->status) == 'Dijual' ? 'selected' : '' }}>Dijual</option>
+                        <option value="Disewakan" {{ old('status', $property->status) == 'Disewakan' ? 'selected' : '' }}>Disewakan</option>
                     </select>
                     @error('status')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -79,25 +87,29 @@
                 <br>
 
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="" class="form-label">Longitude</label>
-                            <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{$property->longitude}}">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="" class="form-label">Latitude</label>
-                            <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{$property->latitude}}">
-                        </div>
-                    </div>
+                   
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="" class="form-label">Harga</label>
                             <input type="number" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{$property->harga}}">
-
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Latitude</label>
+                            <input type="text" class="form-control @error('latitude') is-invalid @enderror" name="latitude" value="{{$property->latitude}}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Longitude</label>
+                            <input type="text" class="form-control @error('longitude') is-invalid @enderror" name="longitude" value="{{$property->longitude}}">
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="row">
 

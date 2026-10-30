@@ -35,19 +35,21 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>No Hp</th>
+                                    <th>Pesan</th>
                                     <th>Nama Property</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php($no=1)
-                                @forelse ($data as $item)
+                                @forelse ($data->where('status','pending') as $item)
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>{{$item->nama}}</td>
                                     <td>{{$item->email}}</td>
                                     <td>{{$item->no_hp}}</td>
-                                    <td>{{$item->property->nama_property}}</td>
+                                    <td>{{$item->pesan}}</td>
+                                    <td>{{$item->properti->nama_properti}}</td>
                                     <td>
                                         <a href="{{url('admin/tiket/'.$item->id.'/edit')}}"
                                             class="btn btn-sm btn-primary">Tentukan Jadwal</a>
@@ -77,23 +79,27 @@
                                     <th>Email</th>
                                     <th>No Hp</th>
                                     <th>Nama Property</th>
+                                    <th>Nama Agent</th>
+                                    <th>Tanggal Pertemuan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php($no=1)
-                                @forelse ($data as $item)
+                                @forelse ($data->where('status','!=','pending') as $item)
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>{{$item->nama}}</td>
                                     <td>{{$item->email}}</td>
                                     <td>{{$item->no_hp}}</td>
-                                    <td>{{$item->property->nama_property}}</td>
+                                    <td>{{$item->properti->nama_properti}}</td>
+                                    <td>{{$item->agen->nama_agent}}</td>
+                                    <td>{{$item->jadwal}}</td>
                                     <td>
-                                        <a href="{{url('admin/tiket/'.$item->id.'/edit')}}"
-                                            class="btn btn-sm btn-primary">Tentukan Jadwal</a>
+                                        <a target="_blank" href="https://wa.me/{{$item->no_hp}}?text=Halo%20{{$item->nama}}%20anda%20bisan%20bertemu%20agent%20kami%20pada%20tanggal%20{{$item->jadwal}}" class="btn btn-sm mb-2 btn-success"> <i class="bx bxl-whatsapp"></i> Hubungi Wa</a>
+                                        <a target="_blank" href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to={{$item->email}}" class="btn btn-sm mb-2 btn-info"> <i class='bx bx-mail-send' ></i> Hubungi Email</a>
                                         <a href="{{url('admin/tiket/'.$item->id.'/delete')}}"
-                                            class="btn btn-sm btn-danger">Delete</a>
+                                            class="btn btn-sm mb-2 btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @empty

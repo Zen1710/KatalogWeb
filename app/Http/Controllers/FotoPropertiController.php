@@ -37,7 +37,7 @@ class FotoPropertiController extends Controller
         ]);
         
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('foto_properti');
+            $tujuan_upload = public_path('images/foto_properti');
             $file = $request->file('foto');
             $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
             $file->move($tujuan_upload, $namaFile);

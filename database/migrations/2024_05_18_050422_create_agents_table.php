@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_agent');
             $table->string('email');
             $table->string('foto');
-            $table->integer('nohp');
+            $table->string('nohp');
             $table->timestamps(
                 
             );

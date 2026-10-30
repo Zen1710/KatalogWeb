@@ -9,7 +9,7 @@
 
                 <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                     <ol class="breadcrumb text-center justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="">Home</a></li>
                         <li class="breadcrumb-item active text-white-50" aria-current="page">
                             About
                         </li>
@@ -28,27 +28,14 @@
             </div>
             <div class="col-lg-6">
                 <p class="text-black-50">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                    enim pariatur similique debitis vel nisi qui reprehenderit totam?
-                    Quod maiores.
+                    {!! str_replace("\n", '<br>',$about->deskripsi) !!}
                 </p>
-                <p class="text-black-50">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-                    saepe, explicabo nihil. Est, autem error cumque ipsum repellendus
-                    veniam sed blanditiis unde ullam maxime veritatis perferendis
-                    cupiditate, at non esse!
-                </p>
-                <p class="text-black-50">
-                    Enim, nisi labore exercitationem facere cupiditate nobis quod
-                    autem veritatis quis minima expedita. Cumque odio illo iusto
-                    reiciendis, labore impedit omnis, nihil aut atque, facilis
-                    necessitatibus asperiores porro qui nam.
-                </p>
+
             </div>
             <div class="col-lg-6">
             
             <div class="img-about dots">
-                        <img src="{{url('theme_property')}}/images/hero_bg_3.jpg" alt="Image" class="img-fluid" />
+                        <img src="{{url('images/about/'.$about->foto)}}" alt="Image" class="img-fluid" />
                     </div>
 
             </div>

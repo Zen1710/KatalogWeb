@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$item->nama_mitra}}</td>
-                        <td><img src="{{asset('mitra/'.$item->foto)}}" width="80"></td>
+                        <td><img src="{{asset('images/mitra/'.$item->foto)}}" width="80"></td>
                         <td>
                             <a href="{{url('admin/mitra/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{{url('admin/mitra/'.$item->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>

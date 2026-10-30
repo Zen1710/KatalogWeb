@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('status');
             $table->integer('agent_id')->nullable();
             $table->integer('properti_id')->nullable();
+            $table->date('jadwal')->nullable();
+            $table->string('pesan')->nullable();
 
 
             $table->timestamps();

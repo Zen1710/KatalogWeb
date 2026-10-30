@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama_properti');
             $table->string('type_properti');
             $table->string('nomor_rumah');
-            $table->string('deskripsi');
+            $table->longText('deskripsi');
             $table->integer('luas');
             $table->date('tahun_pembuatan');
             $table->integer('jumlah_kamar_tidur');
@@ -29,10 +29,12 @@ return new class extends Migration
             $table->string('kulkas');
             $table->string('gym');
             $table->string('alamat');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->integer('harga');
-            $table->string('informasi_tambahan');
+            $table->text('informasi_tambahan');
+            $table->string('terjual')->nullable();
+
 
             $table->timestamps();
         });

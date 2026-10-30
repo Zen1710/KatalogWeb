@@ -101,6 +101,12 @@
                 <div data-i18n="Analytics">Tiket</div>
             </a>
         </li>
+        <li class="menu-item {{request()->is('admin/user') ? 'active' : ''}}">
+            <a href="{{url('admin/user')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-user"></i>
+                <div data-i18n="Analytics">User</div>
+            </a>
+        </li>
 
      
     </ul>

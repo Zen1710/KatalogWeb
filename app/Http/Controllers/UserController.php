@@ -3,23 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data = User::where('id', '!=', auth()->user()->id)->get();
+        return view('admin.user-index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.user-create');
     }
 
     /**
@@ -27,7 +23,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect('admin/user')->with('success', 'User Berhasil Ditambahkan');
     }
 
     /**
@@ -51,7 +60,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+        ];
+        if($request->has('password')) {
+            $user['password'] = bcrypt($request->password);
+        }
+
+        User::where('id', $id)->update($user);
+        return redirect('admin/user')->with('success', 'User Berhasil Diubah');
     }
 
     /**
@@ -59,6 +78,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::where('id', $id)->delete();
+        return redirect('admin/user')->with('success', 'User Berhasil Dihapus');
     }
 }
