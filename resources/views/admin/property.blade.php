@@ -35,7 +35,11 @@
                         <td>{{$item->terjual == 1 ? 'Ya' : 'Tidak'}}</td>
                         <td>
                             <a href="{{url('admin/property/'.$item->id.'/edit')}}" class="btn btn-sm mb-1 btn-primary">Edit</a>
-                            <a href="{{url('admin/property/'.$item->id.'/delete')}}" class="btn btn-sm mb-1 btn-danger">Delete</a>
+                            <form action="{{url('admin/property/'.$item->id)}}" method="post" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm mb-1 btn-danger">Delete</button>
+                            </form>
                             <a href="{{url('admin/foto_denah/'.$item->id)}}" class="btn btn-sm mb-1 btn-success">Foto Denah</a>
                             <a href="{{url('admin/foto_properti/'.$item->id)}}" class="btn btn-sm mb-1 btn-success">Foto properti</a>
                             <button class="btn btn-sm btn-primary" onClick="editStatus({{$item->id}})" >Status Terjual</button>

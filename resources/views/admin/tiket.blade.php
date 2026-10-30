@@ -53,8 +53,11 @@
                                     <td>
                                         <a href="{{url('admin/tiket/'.$item->id.'/edit')}}"
                                             class="btn btn-sm btn-primary">Tentukan Jadwal</a>
-                                        <a href="{{url('admin/tiket/'.$item->id.'/delete')}}"
-                                            class="btn btn-sm btn-danger">Delete</a>
+                                        <form action="{{url('admin/tiket/'.$item->id)}}" method="post" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @empty
@@ -98,8 +101,11 @@
                                     <td>
                                         <a target="_blank" href="https://wa.me/{{$item->no_hp}}?text=Halo%20{{$item->nama}}%20anda%20bisan%20bertemu%20agent%20kami%20pada%20tanggal%20{{$item->jadwal}}" class="btn btn-sm mb-2 btn-success"> <i class="bx bxl-whatsapp"></i> Hubungi Wa</a>
                                         <a target="_blank" href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to={{$item->email}}" class="btn btn-sm mb-2 btn-info"> <i class='bx bx-mail-send' ></i> Hubungi Email</a>
-                                        <a href="{{url('admin/tiket/'.$item->id.'/delete')}}"
-                                            class="btn btn-sm mb-2 btn-danger">Delete</a>
+                                        <form action="{{url('admin/tiket/'.$item->id)}}" method="post" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm mb-2 btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @empty

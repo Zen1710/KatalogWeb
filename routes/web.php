@@ -46,37 +46,30 @@ Route::post('kirimulasan/{id}', [LandingPageController::class, 'ulasan']);
 Route::middleware('auth')->group(function () {  
 Route::get('admin/dashboard',[AuthController::class,'dashboard'])->name('dashboard');
 Route::resource('admin/mitra',MitraController::class);
-Route::get('admin/mitra/{id}/delete', [MitraController::class, 'destroy']);
 
 Route::resource('admin/agen',AgentController::class);
-Route::get('admin/agen/{id}/delete', [AgentController::class, 'destroy']);
 
 Route::resource('admin/property',PropertiController::class);
 Route::post('admin/property/status',[PropertiController::class,'status']);
-Route::get('admin/property/{id}/delete', [PropertiController::class, 'destroy']);
 
 Route::resource('admin/foto_denahs',FotoDenahController::class);
 Route::get('admin/foto_denah/{properti}', [FotoDenahController::class, 'index_properti']);
 Route::get('admin/foto_denah/create/{properti}', [FotoDenahController::class, 'create_properti']);
-Route::get('admin/foto_denahs/{id}/delete', [FotoDenahController::class, 'destroy']);
 
 
 Route::resource('admin/foto_propertis',FotoPropertiController::class);
 Route::get('admin/foto_properti/{properti}', [FotoPropertiController::class, 'index_properti']);
 Route::get('admin/foto_properti/create/{properti}', [FotoPropertiController::class, 'create_properti']);
-Route::get('admin/foto_propertis/{id}/delete', [FotoPropertiController::class, 'destroy']);
 
 
 Route::get('admin/user',[UserController::class,'index']);
 Route::post('admin/user',[UserController::class,'store']);
 Route::post('admin/user/{id}',[UserController::class,'update']);
-Route::get('admin/user/{id}',[UserController::class,'destroy']);
+Route::delete('admin/user/{id}',[UserController::class,'destroy']);
 
 Route::resource('admin/faq',FaqController::class);
-Route::get('admin/faq/{id}/delete', [FaqController::class, 'destroy']);
 
 Route::resource('admin/tiket',TiketController::class);
-Route::get('admin/tiket/{id}/delete', [TiketController::class, 'destroy']);
 
 Route::resource('admin/about',AboutController::class);
 });

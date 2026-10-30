@@ -109,8 +109,11 @@
                         <td>{{$item->email}}</td>
                         <td>
                             <button type="button" onClick="editUser({{$item}})" class="btn btn-sm btn-primary text-white">Edit</button>
-                            <a href="{{url('admin/user/'.$item->id.'/delete')}}"
-                                class="btn btn-sm btn-danger">Delete</a>
+                            <form action="{{url('admin/user/'.$item->id)}}" method="post" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @empty

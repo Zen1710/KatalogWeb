@@ -27,7 +27,11 @@
                         <td><img src="{{asset('images/mitra/'.$item->foto)}}" width="80"></td>
                         <td>
                             <a href="{{url('admin/mitra/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="{{url('admin/mitra/'.$item->id.'/delete')}}" class="btn btn-sm btn-danger">Delete</a>
+                            <form action="{{url('admin/mitra/'.$item->id)}}" method="post" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @empty
