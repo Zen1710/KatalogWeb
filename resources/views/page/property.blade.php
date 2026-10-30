@@ -18,8 +18,7 @@
                 </h1>
                 <form action="{{url('property')}}" class="narrow-w form-search d-flex align-items-stretch mb-3"
                     data-aos="fade-up" data-aos-delay="200">
-                    @csrf
-                    <input type="text" class="form-control px-4" placeholder="Cari rumah impianmu" />
+                    <input type="text" class="form-control px-4" name="search" value="{{ request('search') }}" placeholder="Cari rumah impianmu" />
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
@@ -80,7 +79,7 @@
         <div class="card mb-4 bg-primary text-white">
             <div class="card-body">
                 <form action="{{url('property')}}" method="get">
-                    @csrf
+                    <input type="hidden" name="search" value="{{ request('search') }}">
                     <div class="row">
                         <div class="col-md-4 mx-2 border">
 
@@ -89,13 +88,13 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="">Dari</label>
-                                        <input type="number" class="form-control" name="from_price">
+                                        <input type="number" class="form-control" name="from_price" value="{{ request('from_price') }}">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="">Sampai</label>
-                                        <input type="number" class="form-control" name="to_price">
+                                        <input type="number" class="form-control" name="to_price" value="{{ request('to_price') }}">
                                     </div>
                                 </div>
                             </div>
@@ -111,11 +110,9 @@
                                         <label for="">Kamar Tidur</label>
                                         <select id="" class="form-control" name="jumlah_kamar_tidur">
                                             <option value="">Semua</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value=">5">>5</option>
+                                            @foreach (['1', '2', '3', '4', '5+'] as $opsi)
+                                            <option value="{{ $opsi }}" @selected(request('jumlah_kamar_tidur') === $opsi)>{{ $opsi }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -124,11 +121,9 @@
                                         <label for="">Kamar Mandi</label>
                                         <select id="" class="form-control" name="jumlah_kamar_mandi">
                                             <option value="">Semua</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value=">5">>5</option>
+                                            @foreach (['1', '2', '3', '4', '5+'] as $opsi)
+                                            <option value="{{ $opsi }}" @selected(request('jumlah_kamar_mandi') === $opsi)>{{ $opsi }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -147,7 +142,7 @@
 
         <div class="row">
 
-            @foreach ($property as $item)
+            @forelse ($property as $item)
 
             <div class="col-md-4">
                 <div class="property-item">
@@ -183,7 +178,11 @@
                 </div>
             </div>
 
-            @endforeach
+            @empty
+            <div class="col-12">
+                <p class="text-center text-black-50 py-5">Properti tidak ditemukan. Coba ubah kata kunci atau filter.</p>
+            </div>
+            @endforelse
 
 
 

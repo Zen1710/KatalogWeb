@@ -18,7 +18,6 @@
                 </h1>
                 <form action="{{url('property')}}" class="narrow-w form-search d-flex align-items-stretch mb-3"
                     data-aos="fade-up" data-aos-delay="200">
-                    @csrf
                     <input type="text" class="form-control px-4" name="search" placeholder="Cari rumah impianmu" />
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>

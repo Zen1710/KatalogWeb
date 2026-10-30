@@ -31,39 +31,39 @@ class LandingPageController extends Controller
 
     public function property(Request $request)
     {
-        $property = Properti::with('foto_property')->get();
+        $total = Properti::selectRaw('type_properti, count(*) as total')
+            ->groupBy('type_properti')
+            ->pluck('total', 'type_properti');
 
-        $jumlah = [
-            'Rumah'=>$property->where('type_properti','Rumah')->count(),
-            'Apartement'=>$property->where('type_properti','Apartement')->count(),
-            'Villa'=>$property->where('type_properti','Villa')->count(),
-            'Hotel'=>$property->where('type_properti','Hotel')->count(),
-        ];
+        $jumlah = [];
+        foreach (['Rumah', 'Apartement', 'Villa', 'Hotel'] as $type) {
+            $jumlah[$type] = $total[$type] ?? 0;
+        }
 
-        if($request->has('search') && $request->search != '') {
-            $property = $property->where('title','like','%'.$request->search.'%');
-        }
-        if($request->has('from_price') && $request->from_price != '') {
-            $property = $property->where('harga','>=',$request->from_price);
-        }
-        if($request->has('to_price') && $request->to_price != '') {
-            $property = $property->where('harga','<=',$request->to_price);
-        }
-        if($request->has('jumlah_kamar_mandi') && $request->jumlah_kamar_mandi != '') {
-            if($request->has('jumlah_kamar_mandi') == ">5") {
-                $property = $property->where('jumlah_kamar_mandi','>','5');
-            }else{
-                $property = $property->where('jumlah_kamar_mandi',"=",$request->jumlah_kamar_mandi);
-            }
-        }
-        if($request->has('jumlah_kamar_tidur') && $request->jumlah_kamar_tidur != '') {
-            if($request->has('jumlah_kamar_tidur') == ">5") {
-                $property = $property->where('jumlah_kamar_tidur','>','5');
-            }else{
-                $property = $property->where('jumlah_kamar_tidur',"=",$request->jumlah_kamar_tidur);
-            }
-        }
+        $property = Properti::with('foto_property')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('nama_properti', 'like', '%'.$request->search.'%')
+                        ->orWhere('alamat', 'like', '%'.$request->search.'%');
+                });
+            })
+            ->when($request->filled('from_price'), fn ($query) => $query->where('harga', '>=', (int) $request->from_price))
+            ->when($request->filled('to_price'), fn ($query) => $query->where('harga', '<=', (int) $request->to_price))
+            ->when($request->filled('jumlah_kamar_tidur'), fn ($query) => $this->filterJumlahKamar($query, 'jumlah_kamar_tidur', $request->jumlah_kamar_tidur))
+            ->when($request->filled('jumlah_kamar_mandi'), fn ($query) => $this->filterJumlahKamar($query, 'jumlah_kamar_mandi', $request->jumlah_kamar_mandi))
+            ->get();
+
         return view('page.property',compact('property','jumlah'));
+    }
+
+    // Opsi "5+" di form berarti 5 kamar atau lebih
+    private function filterJumlahKamar($query, $kolom, $nilai)
+    {
+        if ($nilai === '5+') {
+            return $query->where($kolom, '>=', 5);
+        }
+
+        return $query->where($kolom, (int) $nilai);
     }
     public function property_details($id)
     {
