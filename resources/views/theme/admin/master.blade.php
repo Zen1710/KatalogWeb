@@ -137,6 +137,8 @@
         toastr.success('{{session()->get("success")}}')
     @elseif(session()->has('error'))
         toastr.error('{{session()->get("error")}}')
+    @elseif($errors->any())
+        toastr.error(@json($errors->first()))
     @endif
 </script>
 
