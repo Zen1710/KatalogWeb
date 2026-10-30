@@ -42,7 +42,7 @@ class PropertiController extends Controller
             'garasi'=>'required','status'=>'required',
             'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
             'gym'=>'required','alamat'=>'required',
-            'harga'=>'required','informasi_tambahan'=>'required'
+            'harga'=>'required|integer|min:0','informasi_tambahan'=>'required'
         ]);
 
         if($request->has('latitude')) {
@@ -50,7 +50,7 @@ class PropertiController extends Controller
             $data['longitude'] = $request->longitude;
         }
 
-        
+
 
         Properti::create($data);
         return redirect('admin/property')
@@ -89,9 +89,9 @@ class PropertiController extends Controller
             'garasi'=>'required','status'=>'required',
             'ac'=>'required','wifi'=>'required','tv'=>'required','kulkas'=>'required',
             'gym'=>'required','alamat'=>'required',
-            'harga'=>'required','informasi_tambahan'=>'required'
+            'harga'=>'required|integer|min:0','informasi_tambahan'=>'required'
         ]);
-        
+
         if($request->has('latitude')) {
             $data['latitude'] = $request->latitude;
             $data['longitude'] = $request->longitude;
