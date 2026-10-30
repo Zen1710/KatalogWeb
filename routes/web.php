@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('login',[AuthController::class,'login'])->name('login');
 
 Route::post('login-post',[AuthController::class,'postlogin']);
-Route::get('logout',[AuthController::class,'logout']);
+Route::post('logout',[AuthController::class,'logout']);
 Route::get('/', [LandingPageController::class, 'index']);
 Route::get('property', [LandingPageController::class, 'property']);
 Route::get('property/detail/{id}', [LandingPageController::class, 'property_details']);

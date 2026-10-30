@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\Mitra;
 use App\Models\Properti;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -19,45 +19,40 @@ class AuthController extends Controller
     }
     public function postlogin(Request $request)
     {
-
-        $input = $request->all();
-        $rules = [
-
+        $request->validate([
             'email'     => 'required',
             'password'  => 'required',
-
-        ];
-        // error message untuk validasi
-        $message = [
+        ], [
             'required' => ':attribute tidak boleh kosong!'
-        ];
-        // instansiasi validator
-        $validator = Validator::make($request->all(), $rules, $message);
+        ]);
 
-        // proses validasi
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+        // Maksimal 5 percobaan gagal per menit untuk tiap email dari IP yang sama
+        $kunci = Str::lower($request->email).'|'.$request->ip();
+        if (RateLimiter::tooManyAttempts($kunci, 5)) {
+            return back()->withInput($request->only('email'))
+                ->with('error', 'Terlalu banyak percobaan login. Coba lagi dalam '.RateLimiter::availableIn($kunci).' detik.');
         }
 
-        if (User::where('email', '=', $input['email'])->first() == true) {
-            if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
-  
-                        return redirect('admin/dashboard');
-       
-            } else {
-                return redirect()->back()
-                    ->with('error', 'Password salah');
-            }
-        } else {
-            return redirect()->back()
-                ->with('error', 'Email tidak ada atau belum terdaftar');
+        // Satu pesan untuk email maupun password salah, supaya email terdaftar tidak bisa ditebak
+        if (! Auth::attempt($request->only('email', 'password'))) {
+            RateLimiter::hit($kunci);
+
+            return back()->withInput($request->only('email'))
+                ->with('error', 'Email atau password salah');
         }
+
+        RateLimiter::clear($kunci);
+        $request->session()->regenerate();
+
+        return redirect()->intended('admin/dashboard');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/');
     }
 
