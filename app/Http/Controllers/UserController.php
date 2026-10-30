@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
         ]);
 
@@ -60,12 +60,18 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+        ]);
+
         $user = [
             'name' => $request->name,
             'email' => $request->email,
             'no_hp' => $request->no_hp,
         ];
-        if($request->has('password')) {
+        // Field password kosong berarti password lama tetap dipakai
+        if($request->filled('password')) {
             $user['password'] = bcrypt($request->password);
         }
 
