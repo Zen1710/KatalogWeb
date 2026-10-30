@@ -88,14 +88,14 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-Create the database and import the sample data:
+Create the database, run the migrations, and fill it with demo data:
 
 ```bash
 mysql -u root -e "CREATE DATABASE ekatalog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
-mysql -u root ekatalog < ekatalog.sql
+php artisan migrate --seed
 ```
 
-To start with an empty database instead, run `php artisan migrate`.
+The demo data (`database/seeders/DemoSeeder.php`) adds 9 properties in Bengkulu with photos, floor plans, reviews, and visit requests, plus agents, partners, FAQs, and the About page. All names, emails, and phone numbers are fictional. To reset the catalog data later, run `php artisan db:seed --class=DemoSeeder`. User accounts are kept.
 
 ### Run
 
@@ -105,8 +105,6 @@ php artisan serve
 
 - Public catalog: http://127.0.0.1:8000
 - Admin panel: http://127.0.0.1:8000/login (sample account `admin@gmail.com` / `123`, for local use only)
-
-> The sample data in `ekatalog.sql` is dummy data. Some sample photos are not included in the repository, so a few images appear empty on a fresh clone.
 
 ## Project Structure
 
@@ -123,8 +121,11 @@ resources/views/
   page/        public catalog pages
   admin/       admin panel pages
   theme/       layouts (user and admin)
+database/seeders/
+  DemoSeeder.php   demo catalog data
+  demo/            floor plan and partner logo SVGs used by the seeder
 public/images/ uploaded photos and facility icons
-ekatalog.sql   database dump with sample data
+ekatalog.sql   older raw database dump
 ```
 
 ## Roadmap
@@ -140,5 +141,5 @@ Planned improvements, worked on in the `develop` branch:
 
 ## Third-Party Licenses
 
-- Public site template: [Property](https://untree.co/) by Untree.co, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+- Public site template: [Property](https://untree.co/) by Untree.co, licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The demo seeder also reuses this template's photos.
 - Admin template: ArFa, MIT License (see [`public/arfa/LICENSE`](public/arfa/LICENSE)).

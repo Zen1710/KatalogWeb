@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" width="400" height="220">
+<rect x="1" y="1" width="398" height="218" rx="16" fill="#ffffff" stroke="#e3e5e8" stroke-width="2"/>
+<circle cx="92" cy="110" r="52" fill="#2E7D4F"/>
+<circle cx="80" cy="110" r="20" fill="none" stroke="#ffffff" stroke-width="7"/><circle cx="104" cy="110" r="20" fill="none" stroke="#ffffff" stroke-width="7"/>
+<text x="166" y="106" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2328">Koperasi</text>
+<text x="166" y="132" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#1f2328">Sejahtera Bersama</text>
+<text x="166" y="158" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#6b7280">Koperasi Karyawan</text>
+</svg>
