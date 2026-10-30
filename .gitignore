@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+.DS_Store
+
+# Foto orang asli (dummy agen/mitra), jangan dipublikasikan
+/public/images/mitra/*-WA*.jpg
