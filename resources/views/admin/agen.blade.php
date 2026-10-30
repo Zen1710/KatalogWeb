@@ -29,7 +29,7 @@
                         <td>{{$item->email}}</td>
                         <td>{{$item->nohp}}</td>
                         <td>
-                            <img src="{{asset('images/mitra/'.$item->foto)}}" width="50" alt="">
+                            <img src="{{asset('images/agen/'.$item->foto)}}" width="50" alt="">
                         </td>
                         <td>
                             <a href="{{url('admin/agen/'.$item->id.'/edit')}}" class="btn btn-sm btn-primary">Edit</a>

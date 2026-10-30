@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MitraController extends Controller
@@ -35,16 +34,10 @@ class MitraController extends Controller
         //
         $data = $request->validate([
             'nama_mitra'=>'required',
-            'foto'=>'required',
+            'foto'=>'required|'.self::ATURAN_FOTO,
         ]);
-        
-        if($request->hasFile('foto')){
-            $tujuan_upload = public_path('images/mitra');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
-        }
+
+        $data['foto'] = $this->simpanFoto($request->file('foto'), 'mitra');
 
         Mitra::create($data);
         return redirect('admin/mitra')
@@ -79,15 +72,12 @@ class MitraController extends Controller
 
         $data = $request->validate([
             'nama_mitra'=>'required',
-            // 'foto'=>'required',
+            'foto'=>'nullable|'.self::ATURAN_FOTO,
         ]);
-        
+        unset($data['foto']);
+
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('mitra');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
+            $data['foto'] = $this->simpanFoto($request->file('foto'), 'mitra');
         }
 
         Mitra::findOrFail($id)->update($data);

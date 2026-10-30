@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\FotoDenah;
 use App\Models\FotoProperti;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FotoDenahController extends Controller
@@ -35,17 +34,10 @@ class FotoDenahController extends Controller
     {
         //
         $data = $request->validate([
-         
-            'foto'=>'required',
+            'foto'=>'required|'.self::ATURAN_FOTO,
         ]);
-        
-        if($request->hasFile('foto')){
-            $tujuan_upload = public_path('images/foto_denah');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
-        }
+
+        $data['foto'] = $this->simpanFoto($request->file('foto'), 'foto_denah');
         $data['properti_id']=$request->properti;
 
         FotoDenah::create($data);
@@ -78,16 +70,13 @@ class FotoDenahController extends Controller
     {
         //
         // return 's';
-        $data = $request->validate([
-           
+        $request->validate([
+            'foto'=>'nullable|'.self::ATURAN_FOTO,
         ]);
-        
+
+        $data = [];
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('foto_denah');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
+            $data['foto'] = $this->simpanFoto($request->file('foto'), 'foto_denah');
         }
         $ids= FotoDenah::find($id);
         FotoDenah::findOrFail($id)->update($data);

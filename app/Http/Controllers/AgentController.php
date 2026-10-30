@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Agent;
-use Carbon\Carbon;
 
 class AgentController extends Controller
 {
@@ -31,18 +30,12 @@ class AgentController extends Controller
         //
         $data = $request->validate([
             'nama_agent'=>'required',
-            'foto'=>'required',
+            'foto'=>'required|'.self::ATURAN_FOTO,
             'email'=>'required',
             'nohp'=>'required',
         ]);
-        
-        if($request->hasFile('foto')){
-            $tujuan_upload = public_path('images/mitra');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
-        }
+
+        $data['foto'] = $this->simpanFoto($request->file('foto'), 'agen');
 
         Agent::create($data);
         return redirect('admin/agen')
@@ -79,15 +72,12 @@ class AgentController extends Controller
             'nama_agent'=>'required',
             'email'=>'required',
             'nohp'=>'required',
-            // 'foto'=>'required',
+            'foto'=>'nullable|'.self::ATURAN_FOTO,
         ]);
-        
+        unset($data['foto']);
+
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('agen');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
+            $data['foto'] = $this->simpanFoto($request->file('foto'), 'agen');
         }
 
         Agent::findOrFail($id)->update($data);

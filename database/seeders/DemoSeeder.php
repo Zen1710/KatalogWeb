@@ -53,8 +53,7 @@ class DemoSeeder extends Seeder
                 'nama_agent' => $nama,
                 'email' => $email,
                 'nohp' => $nohp,
-                // View agen membaca foto dari folder images/mitra
-                'foto' => $this->salin(public_path(self::FOTO_TEMPLATE.$foto), 'mitra'),
+                'foto' => $this->salin(public_path(self::FOTO_TEMPLATE.$foto), 'agen'),
             ]);
         }
     }

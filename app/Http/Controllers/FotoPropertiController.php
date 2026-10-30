@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\FotoProperti;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FotoPropertiController extends Controller
@@ -32,17 +31,10 @@ class FotoPropertiController extends Controller
         //
         // return $request;
         $data = $request->validate([
-         
-            'foto'=>'required',
+            'foto'=>'required|'.self::ATURAN_FOTO,
         ]);
-        
-        if($request->hasFile('foto')){
-            $tujuan_upload = public_path('images/foto_properti');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
-        }
+
+        $data['foto'] = $this->simpanFoto($request->file('foto'), 'foto_properti');
         $data['properti_id']=$request->properti;
 
         FotoProperti::create($data);
@@ -75,16 +67,13 @@ class FotoPropertiController extends Controller
     {
         //
         // return 's';
-        $data = $request->validate([
-           
+        $request->validate([
+            'foto'=>'nullable|'.self::ATURAN_FOTO,
         ]);
-        
+
+        $data = [];
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('foto_properti');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
+            $data['foto'] = $this->simpanFoto($request->file('foto'), 'foto_properti');
         }
         $ids= FotoProperti::find($id);
         FotoProperti::findOrFail($id)->update($data);

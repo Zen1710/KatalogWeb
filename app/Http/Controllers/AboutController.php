@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -25,15 +24,12 @@ class AboutController extends Controller
         //
         $data = $request->validate([
             'deskripsi'=>'required',
-            // 'foto'=>'required',
+            'foto'=>'nullable|'.self::ATURAN_FOTO,
         ]);
-        
+        unset($data['foto']);
+
         if($request->hasFile('foto')){
-            $tujuan_upload = public_path('images/about');
-            $file = $request->file('foto');
-            $namaFile = Carbon::now()->format('Ymd') . $file->getClientOriginalName();
-            $file->move($tujuan_upload, $namaFile);
-            $data['foto'] = $namaFile;
+            $data['foto'] = $this->simpanFoto($request->file('foto'), 'about');
         }
 
         About::findOrFail($id)->update($data);

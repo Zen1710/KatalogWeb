@@ -254,7 +254,7 @@
                             @foreach ($agent as $item)
                             <div class="item tns-item tns-slide-cloned" aria-hidden="true" tabindex="-1">
                                 <div class="testimonial">
-                                    <img src="{{url('images/mitra/'.$item->foto)}}" alt="Image"
+                                    <img src="{{url('images/agen/'.$item->foto)}}" alt="Image"
                                         class="img-fluid rounded-circle w-25 mb-4">
                                     <div class="rate">
 
